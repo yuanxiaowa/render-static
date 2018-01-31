@@ -1,0 +1,20 @@
+{
+  "name": "render-static",
+  "version": "1.0.0",
+  "description": "渲染静态数据",
+  "main": "index.js",
+  "devDependencies": {
+    "@types/jasmine": "^2.8.2",
+    "jasmine": "^2.8.0"
+  },
+  "dependencies": {
+    "moment": "^2.19.4",
+    "ody-html-tree": "^1.0.0"
+  },
+  "scripts": {
+    "prepublishOnly": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
