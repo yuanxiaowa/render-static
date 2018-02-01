@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const html_tree_1 = require("ody-html-tree");
+const ody_html_tree_1 = require("ody-html-tree");
 const filters = require("./filters");
 const attribute_1 = require("ody-html-tree/libs/attribute");
 var passThroughKeys = ['__data__', '__expr__', 'eval'];
@@ -231,7 +231,7 @@ function renderData(nodes, data) {
     var prevIsTrue = false;
     var compiler = new Compiler(data);
     nodes.forEach(node => {
-        if (node instanceof html_tree_1.ElementNode) {
+        if (node instanceof ody_html_tree_1.ElementNode) {
             if (node.hasAttribute(compiler.keySlotScope)) {
                 if (node.external.needRender) {
                     delete node.external.needRender;
@@ -284,7 +284,7 @@ function renderData(nodes, data) {
             if (node.hasAttribute(compiler.keySwitch)) {
                 let v = compiler.getSwitch(node.getAttribute(compiler.keySwitch));
                 let item = node.childNodes.find(node => {
-                    if (node instanceof html_tree_1.ElementNode) {
+                    if (node instanceof ody_html_tree_1.ElementNode) {
                         if (node.hasAttribute(compiler.keySwitchCase)) {
                             let _v = compiler.getSwitchCase(node.getAttribute(compiler.keySwitchCase));
                             if (_v === v) {
@@ -300,8 +300,8 @@ function renderData(nodes, data) {
                             warn('switch孩子节点上缺少指令');
                         }
                     }
-                    else if (!(node instanceof html_tree_1.CommentNode)) {
-                        if (node instanceof html_tree_1.TextNode) {
+                    else if (!(node instanceof ody_html_tree_1.CommentNode)) {
+                        if (node instanceof ody_html_tree_1.TextNode) {
                             if (node.text.trim().length > 0) {
                                 warn('switch的孩子只能为元素节点');
                             }
@@ -349,7 +349,7 @@ function renderData(nodes, data) {
                 renderData(node.childNodes, data);
             }
         }
-        else if (node instanceof html_tree_1.TextNode) {
+        else if (node instanceof ody_html_tree_1.TextNode) {
             node.text = compiler.replaceExpression(node.text);
         }
     });
