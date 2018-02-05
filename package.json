@@ -1,6 +1,6 @@
 {
   "name": "render-static",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "渲染静态数据",
   "main": "index.js",
   "devDependencies": {

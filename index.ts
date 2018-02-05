@@ -230,7 +230,7 @@ export function renderData(nodes: Node[], data: any) {
   var prevIsTrue = false;
   var compiler = new Compiler(data)
   nodes.forEach(node => {
-    if (node instanceof ElementNode) {
+    if (node.isElement()) {
       if (node.hasAttribute(compiler.keySlotScope)) {
         if (node.external.needRender) {
           delete node.external.needRender
@@ -281,7 +281,7 @@ export function renderData(nodes: Node[], data: any) {
       if (node.hasAttribute(compiler.keySwitch)) {
         let v = compiler.getSwitch(node.getAttribute(compiler.keySwitch));
         let item = <ElementNode | undefined>node.childNodes.find(node => {
-          if (node instanceof ElementNode) {
+          if (node.isElement()) {
             if (node.hasAttribute(compiler.keySwitchCase)) {
               let _v = compiler.getSwitchCase(node.getAttribute(compiler.keySwitchCase));
               if (_v === v) {
@@ -294,8 +294,8 @@ export function renderData(nodes: Node[], data: any) {
             } else {
               warn('switch孩子节点上缺少指令');
             }
-          } else if (!(node instanceof CommentNode)) {
-            if (node instanceof TextNode) {
+          } else if (!node.isComment()) {
+            if (node.isText()) {
               if (node.text.trim().length > 0) {
                 warn('switch的孩子只能为元素节点');
               }
@@ -341,7 +341,7 @@ export function renderData(nodes: Node[], data: any) {
       if (deep && node.name !== 'style' && node.childNodes.length > 0) {
         renderData(node.childNodes, data);
       }
-    } else if (node instanceof TextNode) {
+    } else if (node.isText()) {
       node.text = compiler.replaceExpression(node.text);
     }
   })
